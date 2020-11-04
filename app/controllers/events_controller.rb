@@ -16,9 +16,11 @@ class EventsController < ApplicationController
         if @event.save
           puts "saved"
           redirect_to events_path, :notice => 'Evenement créé'
+          flash[:notive] = "Event created !"
         else
           puts "ça n'a pas fonctionne,essaie encore"
           puts @event.errors.messages
+          flash.now[:alert] = "We cannot create this event for this reason(s) :"
           render 'new'
         end
     
