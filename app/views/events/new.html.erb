@@ -4,9 +4,6 @@
 
 <!-- ... -->
 
-<form>
-  <div class="form-group">
-
 <%= form_tag events_path(action: 'create'), method: "post" do %>
 
   <%= label_tag 'Titre' %>
@@ -36,8 +33,5 @@
   <%= submit_tag "Create Gossip", class: 'btn btn-primary' %>
 
 <% end %>
-
-</div>
-</form>
 
 <!-- ... -->
