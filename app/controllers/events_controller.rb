@@ -23,12 +23,12 @@ class EventsController < ApplicationController
           flash.now[:alert] = "We cannot create this event for this reason(s) :"
           render 'new'
         end
-    
     end
 
     def show 
         @event = params[:id]
         @event_id = Event.find(params[:id])
+        @attendance = Attendance.all
     end
 
     private

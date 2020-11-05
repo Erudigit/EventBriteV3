@@ -1,0 +1,14 @@
+<div class="card-columns">
+    @intendances.each do |attendance|
+        if attendance.user_id == current_user.id 
+            <div class="card" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title"> Title : <%= @event.title %></h5> 
+                    <p class="card-text"><small class="text-muted"> Organisé le : <%= @event.start_date %></small></p>
+                    <p class="card-text"> Description : <%= @event.description %></small></p>
+                    <%= link_to "voir l'event", event_path(@event.id), class:"btn btn-primary" %>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+</div>

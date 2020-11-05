@@ -2,6 +2,10 @@ class UsersController < ApplicationController
     before_action :authenticate_user!
     before_action :only_see_own_page, only: [:show]
 
+    def index 
+        
+    end
+
     def show 
         @user = User.find(params[:id])
         @events = Event.all

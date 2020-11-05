@@ -1,6 +1,6 @@
 class Attendance < ApplicationRecord
-    belongs_to :attendance, optional: true
-    belongs_to :user, optional: true
+    belongs_to :event
+    belongs_to :user
 
     after_create :new_event_send
       

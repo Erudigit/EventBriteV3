@@ -9,6 +9,13 @@
             <p> cette event a été crée le: <%=@event_id.created_at %> </p> </br>
             <p><U>Contenu de l'event:</U> </p> </br>
             <p> <%=@event_id.description %> </p> </br>
-            <a href="<%=  event_path(@event) %>" class="btn btn-danger"  data-confirm="Etes-vous sur ?" data-method="DELETE"> Supprimer </a>
+            <% if @event_id.user.id == current_user.id %>
+                <a href="<%=  event_path(@event) %>" class="btn btn-danger"  data-confirm="Etes-vous sur ?" data-method="DELETE"> Supprimer </a>
+            <% end %>
+            
+            
+            <%= link_to "Participer", new_attendance_path(@event), class: "card-text"%>
+
+
     </div>
 </div>
