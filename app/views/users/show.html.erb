@@ -6,15 +6,16 @@
   <li> Ta description: <%= @user.description %> </li>
   <li> Ton email : <%= @user.email %> </li>
 </p>
+<%= link_to "Mettre ajour t'es informations", edit_user_path(@user.id), class:"btn btn-primary" %>
+    
 
 <div class="card-columns">
 <% @events.each do |event|%>
-    <% if event.user_id == @user.id %>
+    <% if event.admin_id == @user.id %>
   <div class="card" style="max-width: 18rem;">
     <div class="card-body">
     
       <h5 class="card-title"> Title : <%= event.title %></h5> 
-      <p class="card-text"><small class="text-muted"> Author <%= event.user.first_name %></small></p>
       <%= link_to "voir l'event", event_path(event.id), class:"btn btn-primary" %>
     
     </div>

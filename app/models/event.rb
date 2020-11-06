@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-    belongs_to :user
+
     has_many :users, through: :attendances
     has_many :attendances
 
@@ -8,5 +8,5 @@ class Event < ApplicationRecord
     validates :title, presence: true
     validates :description, presence: true
     validates :price, presence: true
-    validates :location, presence: true      
+    validates :location, presence: true
 end

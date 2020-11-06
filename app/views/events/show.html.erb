@@ -4,18 +4,18 @@
     </div>
 
     <div class="card-body">
-        <h6 class="card-title"> <U>le titre de l'Event est:</U> <%=@event_id.title %> </h6>
-            <h7> l'auteur est: <%= link_to "#{@event_id.user.email}", user_path%></h7>
-            <p> cette event a été crée le: <%=@event_id.created_at %> </p> </br>
+        <h6 class="card-title"> <U>le titre de l'Event est:</U> <%=@event.title %> </h6>
+            <h7> l'auteur est: <%= link_to "#{@user.email}", user_path(@user.id)%></h7>
+            <p> cette event a été crée le: <%=@event.created_at %> </p> </br>
             <p><U>Contenu de l'event:</U> </p> </br>
-            <p> <%=@event_id.description %> </p> </br>
-            <% if @event_id.user.id == current_user.id %>
+            <p> <%=@event.description %> </p> </br>
+            <% if @user.id == current_user.id %>
                 <a href="<%=  event_path(@event) %>" class="btn btn-danger"  data-confirm="Etes-vous sur ?" data-method="DELETE"> Supprimer </a>
+                <a href="<%= event_attendances_path(@event.id) %>" class="btn btn-primary"> Afficher les détails de l'évènement </a>
+            <% elsif guest_already_participated(@guests) == true %>
+                <p>Tu participes à cet évènement </p>
+            <% else %>
+                <%= link_to "Participer", new_event_attendance_path(@event), class: "card-text"%>
             <% end %>
-            
-            
-            <%= link_to "Participer", new_attendance_path(@event), class: "card-text"%>
-
-
     </div>
 </div>

@@ -1,4 +1,9 @@
-<%= form_tag attendances_path do %>
+<% if is_event_admin?(@admin) %>
+<p>T'es con ou quoi c'est toi qui a créé l'évènement !</p> 
+<% elsif guest_already_participated(@guests) == true %>
+  <p>Mais tu y participes déjà à cet évènement, tu veux payer 2x ou quoi ?!</p>  
+<% else %> 
+<%= form_tag event_attendances_path do %>
   <article>
     <% if flash[:error].present? %>
       <div id="error_explanation">
@@ -6,16 +11,17 @@
       </div>
     <% end %>
     <label class="amount">
-      <span>Amount: <% @event.price %> euros</span>
+      <span>Amount: <%= @amount %> euros</span>
     </label>
   </article>
 
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="A month's subscription"
-          data-amount="<%= @event.price * 100 %>"
+          data-amount="<%= @amount * 100 %>"
           data-currency="eur"
           data-locale="auto"></script>
+<% end %>
 <% end %>
 
 <% @attendance.event_id = @event %>

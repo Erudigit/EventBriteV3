@@ -1,17 +1,18 @@
 class AttendancesController < ApplicationController
 
     def index 
-        @attendances = Attendance.all
-        @event = Event.find(attendance.event_id)
+        @guests = User.joins(:attendances).where('attendances.event_id = ?', params[:event_id])
+        @event = Event.find(params[:event_id])
+        @admin = User.find(@event.admin_id)
     end
 
     def new
         @attendance = Attendance.new
-        @event = Event.find(params[:new])
-        puts "**********"
-        puts @event.price
-        puts "**********"
+        @event = Event.find(params[:event_id])
+        @admin = User.find(@event.admin_id)
+        @amount = @event.price
         session[:price] = @event.price
+        @guests = User.joins(:attendances).where('attendances.event_id = ?', params[:event_id])
     end
 
     def create
@@ -30,11 +31,11 @@ class AttendancesController < ApplicationController
             currency: 'eur',
         })
 
-        @attendance = Attendance.create(stripe_customer_id: "5", user_id: current_user.id, event_id: :event_id)
+        @attendance = Attendance.create(stripe_customer_id: params[:token], user: current_user, event: Event.find(params[:event_id]))
         
         if @attendance.save
           puts "saved"
-          redirect_to events_path, :notice => 'Participation enregisté !'
+          redirect_to event_attendances_path(Event.find(params[:event_id])), :notice => 'Participation enregisté !'
           flash[:notive] = "Participation créé !"
         else
           puts "ça n'a pas fonctionne,essaie encore"

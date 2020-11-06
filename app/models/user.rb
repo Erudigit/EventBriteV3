@@ -3,7 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+    has_many :events, foreign_key: 'admin_id'
     has_many :events, through: :attendances
+    has_many :attendances
 
 
     after_create :welcome_send

@@ -15,34 +15,38 @@
 
 <!-- ... -->
 
+<div class="container">
+
 <%= form_tag events_path(action: 'create'), method: "post" do %>
 
   <%= label_tag 'Titre' %>
-  <%= text_field_tag 'title', @event.title %>
+  <%= text_field_tag 'title', @event.title, class: "form-control" %>
   <br /> <br />
 
   <%= label_tag 'Quand' %>
-  <%= datetime_field_tag 'start_date', @event.start_date %>
+  <%= datetime_field_tag 'start_date', @event.start_date, class: "form-control" %>
   <br /> <br />
 
   <%= label_tag 'Description' %>
-  <%= text_area_tag 'description', @event.description %>
+  <%= text_area_tag 'description', @event.description, class: "form-control" %>
   <br /> <br />
 
   <%= label_tag 'Durée' %>
-  <%= text_field_tag 'duration', @event.duration %>
+  <%= text_field_tag 'duration', @event.duration, class: "form-control" %>
   <br /> <br />
   
   <%= label_tag 'Prix pour 1 entrée' %>
-  <%= text_field_tag 'price', @event.price %>
+  <%= text_field_tag 'price', @event.price, class: "form-control" %>
   <br /> <br />
 
   <%= label_tag 'Où ça ?' %>
-  <%= text_field_tag 'location', @event.location %>
+  <%= text_field_tag 'location', @event.location, class: "form-control" %>
   <br /> <br />
 
-  <%= submit_tag "Create Gossip", class: 'btn btn-primary' %>
+  <%= submit_tag "Creer l'évènement", class: 'btn btn-primary form-control'%>
 
 <% end %>
+
+</div>
 
 <!-- ... -->

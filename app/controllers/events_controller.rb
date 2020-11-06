@@ -10,9 +10,14 @@ class EventsController < ApplicationController
     end
     
     def create
-        @event = Event.create(post_params)
-        @event.user = current_user
-        
+        @event = Event.new(title: params[:title], 
+        description: params[:description],
+        location: params[:location],
+        price: params[:price],
+        start_date: params[:start_date],
+        duration: params[:duration],
+        admin_id: current_user.id)
+
         if @event.save
           puts "saved"
           redirect_to events_path, :notice => 'Evenement créé'
@@ -26,16 +31,9 @@ class EventsController < ApplicationController
     end
 
     def show 
-        @event = params[:id]
-        @event_id = Event.find(params[:id])
+        @event = Event.find(params[:id])
+        @user = User.find(@event.admin_id)
         @attendance = Attendance.all
+        @guests = User.joins(:attendances).where('attendances.event_id = ?', params[:event_id])
     end
-
-    private
-
-    def post_params
-      params.permit(:title, :start_date, :description, :duration, :price, :location)
-    end
-
-
 end

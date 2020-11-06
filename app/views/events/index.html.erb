@@ -11,14 +11,14 @@
     <div class="card" style="max-width: 18rem;">
       <div class="card-body">
         <h5 class="card-title"> Title : <%= event.title %></h5> 
-        <p class="card-text"><small class="text-muted"> Author <%= event.user.first_name %></small></p>
+        <p class="card-text"><small class="text-muted"> Author <%= User.find(event.admin_id).email %></small></p>
         <%= link_to "voir l'event", event_path(event.id), class:"btn btn-primary" %>
         <% unless current_user.blank? %>
-          <% if event.user.id == current_user.id %>
+          <% if event.admin_id == current_user.id %>
             <a href="<%=  event_path(event.id) %>" class="btn btn-danger"  data-confirm="Etes-vous surs de vouloir supprimer le event ?" data-method="DELETE"> Supprimer </a>
           <% end %>
         <% end %>
       </div>
     </div>
-  <% end %>
+    <% end %>
 </div>
